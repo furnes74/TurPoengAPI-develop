@@ -73,7 +73,14 @@ namespace TurPoengAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Person}/{action=Get}/{id?}");
+
+                //endpoints.MapControllers();
+                //endpoints.MapControllerRoute(
+                //    name: "vedlegg",
+                //    pattern: "Vedlegg/{formId}/{formSecret}");
             });
         }
     }

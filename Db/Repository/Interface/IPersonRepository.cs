@@ -1,9 +1,9 @@
-﻿using Db.Models;
+﻿using Db.ViewModels;
 
 namespace Db.Repository
 {
     public interface IPersonRepository
     {
-        Person[] GetPersoner();
+        PersonVm GetPerson(int id);
     }
 }

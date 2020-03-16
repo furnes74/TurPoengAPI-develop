@@ -1,5 +1,6 @@
 ﻿using Db.Context;
-using Db.Models;
+using Db.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -19,9 +20,31 @@ namespace Db.Repository
             _context.Dispose();
         }
 
-        public Person[] GetPersoner()
+        public PersonVm GetPerson(int id)
         {
-            return _context.Person.ToArray();
+            var personVm = _context.Person
+                .Include(person => person.IdrettslagMember)
+                .Select(person => new PersonVm
+                {
+                    Id = person.Id,
+                    Firstname = person.Firstname,
+                    Lastname = person.Lastname,
+                    Picture = person.Picture
+                })
+                .SingleOrDefault(p => p.Id == id);
+
+            
+            personVm.Idrettslag = _context.IdrettslagMember
+                .Include(im => im.Idrettslag)
+                .Where(im => im.PersonId == id
+                ).Select(im => new IdrettslagVm
+                {
+                    Id = im.Idrettslag.Id,
+                    Name = im.Idrettslag.Name
+                })
+                .ToArray();
+
+            return personVm;
         }
     }
 }

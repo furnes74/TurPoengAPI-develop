@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Db;
-using Db.Models;
-using Db.Context;
 using Db.Repository;
+using Db.ViewModels;
 
 namespace TurPoengAPI.Controllers
 {
@@ -25,9 +19,17 @@ namespace TurPoengAPI.Controllers
         }
 
         [HttpGet]
-        public Person[] Get()
+        public PersonVm Get(int id)
         {
-            return _personRepo.GetPersoner();
+            if (id == 0)
+            {
+                return new PersonVm { 
+                    Id = 0
+                };
+            } else
+            {
+                return _personRepo.GetPerson(id);
+            }
         }
     }
 }

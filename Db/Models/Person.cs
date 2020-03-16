@@ -39,7 +39,7 @@ namespace Db.Models
         [MaxLength(30)]
         public string Password { get; set; }
        
-        public IdrettslagMember[] Idrettslag { get; set; }
+        public IdrettslagMember[] IdrettslagMember { get; set; }
 
         public Pictures[] Pictures { get; set; }
     }
