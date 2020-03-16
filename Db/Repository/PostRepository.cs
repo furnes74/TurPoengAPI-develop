@@ -24,5 +24,12 @@ namespace Db.Repository
         {
             return _context.Post.ToArray();
         }
+
+        
+        public Post[] GetSpecialPost()
+        {
+            return null;
+        }
+        
     }
 }

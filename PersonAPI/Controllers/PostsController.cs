@@ -31,9 +31,9 @@ namespace TurPoengAPI.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPost()
+        public Post[] Get() 
         {
-            return await _context.Post.ToListAsync();
+            return  _postRepo.GetPost();
         }
 
         // GET: api/Posts/5
