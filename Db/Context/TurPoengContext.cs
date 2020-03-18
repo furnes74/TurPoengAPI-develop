@@ -16,8 +16,16 @@ namespace Db.Context
             builder.Entity<Pictures>().HasKey(x => new { x.PersonId, x.PostId });
 
             builder.Entity<IdrettslagPost>().HasKey(x => new { x.PostId, x.IdrettslagId });
-            
+
             builder.Entity<IdrettslagMember>().HasKey(x => new { x.PersonId, x.IdrettslagId });
+
+            builder.Entity<MyFriend>()
+                .HasKey(x => new { x.PersonId, x.FriendId });
+
+            builder.Entity<Person>()
+                .HasMany(p => p.MyFriends)
+                .WithOne(mf => mf.Person)
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
 
@@ -30,5 +38,6 @@ namespace Db.Context
         public DbSet<Pictures> Pictures { get; set; }
         public DbSet<Post> Post { get; set; }
         public DbSet<PostVisit> PostVisit { get; set; }
+        public DbSet<MyFriend> MyFriend { get; set; }
     }
 }

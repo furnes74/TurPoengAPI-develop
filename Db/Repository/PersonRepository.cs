@@ -22,29 +22,40 @@ namespace Db.Repository
 
         public PersonVm GetPerson(int id)
         {
-            var personVm = _context.Person
+            return _context.Person
                 .Include(person => person.IdrettslagMember)
+                .Include(person => person.MyFriends)
+                .ThenInclude(f => f.Friend)
+                .Include(person => person.IdrettslagMember)
+                .ThenInclude(im => im.Idrettslag)
                 .Select(person => new PersonVm
                 {
                     Id = person.Id,
                     Firstname = person.Firstname,
                     Lastname = person.Lastname,
-                    Picture = person.Picture
+                    Picture = person.Picture,
+                    Idrettslag = person.IdrettslagMember
+                    .Select(im => new IdrettslagVm
+                    {
+                        Id = im.Idrettslag.Id,
+                        Name = im.Idrettslag.Name
+                    }).ToArray(),
+                    Friends = person.MyFriends.Select(mf => new FriendVm
+                    {
+                        Firstname = mf.Friend.Firstname,
+                        Lastname = mf.Friend.Lastname,
+                        FriendId = mf.FriendId,
+                        Picture = mf.Friend.Picture,
+                        Idrettslag = mf.Friend.IdrettslagMember
+                        .Select(im => new IdrettslagVm
+                        {
+                            Id = im.Idrettslag.Id,
+                            Name = im.Idrettslag.Name
+                        }).ToArray()
+                    })
+                    .ToArray()
                 })
                 .SingleOrDefault(p => p.Id == id);
-
-            
-            personVm.Idrettslag = _context.IdrettslagMember
-                .Include(im => im.Idrettslag)
-                .Where(im => im.PersonId == id
-                ).Select(im => new IdrettslagVm
-                {
-                    Id = im.Idrettslag.Id,
-                    Name = im.Idrettslag.Name
-                })
-                .ToArray();
-
-            return personVm;
         }
     }
 }

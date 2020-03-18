@@ -18,8 +18,8 @@ namespace TurPoengAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public PersonVm Get(int id)
+        [HttpGet("GetPerson")]
+        public PersonVm GetPerson(int id)
         {
             if (id == 0)
             {

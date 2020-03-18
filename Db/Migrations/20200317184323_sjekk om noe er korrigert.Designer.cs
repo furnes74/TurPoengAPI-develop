@@ -4,14 +4,16 @@ using Db.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Db.Migrations
 {
     [DbContext(typeof(TurPoengContext))]
-    partial class TurPoengContextModelSnapshot : ModelSnapshot
+    [Migration("20200317184323_sjekk om noe er korrigert")]
+    partial class sjekkomnoeerkorrigert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,24 +109,6 @@ namespace Db.Migrations
                     b.HasIndex("IdrettslagId");
 
                     b.ToTable("IdrettslagPost");
-                });
-
-            modelBuilder.Entity("Db.Models.MyFriend", b =>
-                {
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FriendId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Accepted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("PersonId", "FriendId");
-
-                    b.HasIndex("FriendId");
-
-                    b.ToTable("MyFriend");
                 });
 
             modelBuilder.Entity("Db.Models.Person", b =>
@@ -338,21 +322,6 @@ namespace Db.Migrations
                     b.HasOne("Db.Models.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Db.Models.MyFriend", b =>
-                {
-                    b.HasOne("Db.Models.Person", "Friend")
-                        .WithMany()
-                        .HasForeignKey("FriendId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Db.Models.Person", "Person")
-                        .WithMany("MyFriends")
-                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

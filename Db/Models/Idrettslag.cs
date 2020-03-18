@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Db.Models
 {
@@ -28,6 +29,6 @@ namespace Db.Models
         public int AdminId { get; set; } 
         public Person Admin { get; set; }
 
-        public IdrettslagMember[] Members { get; set; }
+        public List<IdrettslagMember> Members { get; set; }
     }
 }

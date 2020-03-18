@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Db.Models
@@ -14,8 +15,10 @@ namespace Db.Models
         public string Lastname { get; set; }
 
         [MaxLength(11)]
-        public string phoneNumber { get; set; }
-        public bool isVisibleToOthers { get; set; }
+        public string PhoneNumber { get; set; }
+        
+        public bool IsVisibleToOthers { get; set; }
+
         public byte[] Picture { get; set; }
 
         /*
@@ -39,8 +42,10 @@ namespace Db.Models
         [MaxLength(30)]
         public string Password { get; set; }
        
-        public IdrettslagMember[] IdrettslagMember { get; set; }
+        public List<IdrettslagMember> IdrettslagMember { get; set; }
 
-        public Pictures[] Pictures { get; set; }
+        public List<Pictures> Pictures { get; set; }
+
+        public List<MyFriend> MyFriends { get; set; }
     }
 }
