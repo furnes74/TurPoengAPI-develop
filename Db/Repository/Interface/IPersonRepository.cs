@@ -8,5 +8,6 @@ namespace Db.Repository
         PersonVm GetPerson(int id);
         Person GetPersonForAdmin(int id);
 
+        FriendVm[] GetFriends(int id);
     }
 }
