@@ -1,4 +1,5 @@
 ﻿using Db.Context;
+using Db.Models;
 using Db.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace Db.Repository
         {
             _context.Dispose();
         }
+
 
         public PersonVm GetPerson(int id)
         {
@@ -55,6 +57,13 @@ namespace Db.Repository
                     })
                     .ToArray()
                 })
+                .SingleOrDefault(p => p.Id == id);
+        }
+
+
+        public Person GetPersonForAdmin(int id)
+        {
+            return _context.Person
                 .SingleOrDefault(p => p.Id == id);
         }
     }

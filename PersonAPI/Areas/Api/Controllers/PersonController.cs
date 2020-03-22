@@ -3,22 +3,18 @@ using Microsoft.Extensions.Logging;
 using Db.Repository;
 using Db.ViewModels;
 
-namespace TurPoengAPI.Controllers
+namespace TurPoengAPI.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class PersonController : ControllerBase
+    public class PersonController : ApiControllerBase
     {
-        private readonly ILogger<PersonController> _logger;
         private readonly IPersonRepository _personRepo;
 
-        public PersonController(IPersonRepository personRepo, ILogger<PersonController> logger)
+        public PersonController(IPersonRepository personRepo, ILogger<PersonController> logger) : base(logger)
         {
             _personRepo = personRepo;
-            _logger = logger;
         }
 
-        [HttpGet("GetPerson")]
+        [HttpGet("GetPerson/{id}")]
         public PersonVm GetPerson(int id)
         {
             if (id == 0)

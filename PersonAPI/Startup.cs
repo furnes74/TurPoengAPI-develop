@@ -9,6 +9,7 @@ using Db.Repository;
 using Db.Repository.Interface;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Microsoft.OpenApi.Models;
 
 namespace TurPoengAPI
 {
@@ -55,11 +56,26 @@ namespace TurPoengAPI
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TurPoeng API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TurPoeng API V1");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,19 +85,25 @@ namespace TurPoengAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Person}/{action=GetPerson}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "adminRoute",
+                    areaName: "admin",
+                    pattern: "{area=admin}/{controller=PersonAdmin}/{action=GetPerson}/{id?}"
+                );
+                endpoints.MapAreaControllerRoute(
+                    name: "apiRoute",
+                    areaName: "api",
+                    pattern: "{area=api}/{controller=Person}/{action=GetPerson}/{id?}"
+                );
 
                 //endpoints.MapControllerRoute(
-                //    name: "vedlegg",
-                //    pattern: "Vedlegg/{formId}/{formSecret}");
+                //    name: "default",
+                //    pattern: "{controller=Person}/{action=GetPerson}/{id?}"
+                //);
             });
         }
     }
