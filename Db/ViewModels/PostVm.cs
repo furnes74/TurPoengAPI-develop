@@ -19,5 +19,10 @@
         public double Longitude { get; set; }
 
         public int DefaultPoints { get; set; }
+
+        public int SuggestedByPersonId { get; set; }
+
+        public string SuggestedByPersonName { get; set; }
+
     }
 }

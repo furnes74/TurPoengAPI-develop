@@ -16,6 +16,12 @@ namespace Db.Repository.Interface
         PostVm GetPostVm(int id);
 
         PostVm[] SearchPostNearBy(SearchPostVm searchVm);
+
+        bool AddOrUpdatePost(PostVm newPostVm);
+
+        Post[] GetSuggestedPosts();
+
+        public bool ApprovePost(int id);
     }
 
 }

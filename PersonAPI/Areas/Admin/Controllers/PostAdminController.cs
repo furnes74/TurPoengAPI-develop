@@ -14,7 +14,7 @@ namespace TurPoengAPI.Admin.Controllers
             _postRepo = postRepo;
         }
 
-        [HttpGet("{action}")]
+        [HttpGet("GetAllPosts")]
         public Post[] GetAllPosts() 
         {
             return  _postRepo.GetAllPosts();
@@ -25,5 +25,18 @@ namespace TurPoengAPI.Admin.Controllers
         {
             return _postRepo.GetPost(id);
         }
+
+        [HttpGet("GetNewSuggestedPosts")]
+        public Post[] GetNewSuggestedPosts()
+        {
+            return _postRepo.GetSuggestedPosts();
+        }
+
+        [HttpPost("ApprovePost")]
+        public bool ApprovePost(int id)
+        {
+            return _postRepo.ApprovePost(id);
+        }
+
     }
 }

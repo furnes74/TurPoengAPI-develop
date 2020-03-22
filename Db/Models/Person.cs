@@ -47,5 +47,8 @@ namespace Db.Models
         public List<Pictures> Pictures { get; set; }
 
         public List<MyFriend> MyFriends { get; set; }
+
+        public List<Post> SuggestedPosts { get; set; }
     }
+
 }

@@ -32,6 +32,11 @@ namespace TurPoengAPI.Api.Controllers
             return _postRepo.SearchPostNearBy(searchVm);
         }
 
+        [HttpPost("SuggestNewPost")]
+        public bool SuggestNewPost(PostVm newPostVm)
+        {
+            return _postRepo.AddOrUpdatePost(newPostVm);
+        }
 
 
         //// PUT: api/Posts/5
