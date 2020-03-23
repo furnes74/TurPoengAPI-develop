@@ -34,7 +34,7 @@ namespace Db.Models
         public bool Approved { get; set; }
 
         // Person som sender inn forespørsel om ny post
-        public int SuggestedByPersonId { get; set; }
+        public int? SuggestedByPersonId { get; set; }
         public Person SuggestedByPerson { get; set; }
 
     }

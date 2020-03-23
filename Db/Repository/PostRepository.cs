@@ -149,7 +149,7 @@ namespace Db.Repository
                 Longitude = post.Longitude,
                 DefaultPoints = post.DefaultPoints,
                 SuggestedByPersonId = post.SuggestedByPersonId,
-                SuggestedByPersonName = $"{post.SuggestedByPerson.Lastname}, {post.SuggestedByPerson.Firstname}"
+                SuggestedByPersonName = $"{post.SuggestedByPerson?.Lastname}, {post.SuggestedByPerson?.Firstname}"
             };
         }
 

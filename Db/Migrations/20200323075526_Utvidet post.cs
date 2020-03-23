@@ -2,7 +2,7 @@
 
 namespace Db.Migrations
 {
-    public partial class utvidetposttilåinneholdeforslagtilnyeposter : Migration
+    public partial class Utvidetpost : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,7 @@ namespace Db.Migrations
             migrationBuilder.AddColumn<int>(
                 name: "SuggestedByPersonId",
                 table: "Post",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_SuggestedByPersonId",

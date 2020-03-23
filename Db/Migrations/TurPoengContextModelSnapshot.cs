@@ -273,7 +273,7 @@ namespace Db.Migrations
                     b.Property<int>("PostWalkDistance")
                         .HasColumnType("int");
 
-                    b.Property<int>("SuggestedByPersonId")
+                    b.Property<int?>("SuggestedByPersonId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -393,9 +393,7 @@ namespace Db.Migrations
                 {
                     b.HasOne("Db.Models.Person", "SuggestedByPerson")
                         .WithMany("SuggestedPosts")
-                        .HasForeignKey("SuggestedByPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SuggestedByPersonId");
                 });
 
             modelBuilder.Entity("Db.Models.PostVisit", b =>

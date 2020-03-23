@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Db.Migrations
 {
     [DbContext(typeof(TurPoengContext))]
-    [Migration("20200322132812_utvidet post til å inneholde forslag til nye poster")]
-    partial class utvidetposttilåinneholdeforslagtilnyeposter
+    [Migration("20200323075526_Utvidet post")]
+    partial class Utvidetpost
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -275,7 +275,7 @@ namespace Db.Migrations
                     b.Property<int>("PostWalkDistance")
                         .HasColumnType("int");
 
-                    b.Property<int>("SuggestedByPersonId")
+                    b.Property<int?>("SuggestedByPersonId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -395,9 +395,7 @@ namespace Db.Migrations
                 {
                     b.HasOne("Db.Models.Person", "SuggestedByPerson")
                         .WithMany("SuggestedPosts")
-                        .HasForeignKey("SuggestedByPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SuggestedByPersonId");
                 });
 
             modelBuilder.Entity("Db.Models.PostVisit", b =>
